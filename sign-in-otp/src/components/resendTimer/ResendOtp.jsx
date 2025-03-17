@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 import { useEffect, useState } from "react"
-function ResendOtp({time}) {
+function ResendOtp({time,canValidate,requestOtphandler,validateOTPHandler}) {
   
     const [isValidateAllowed, setIsValidateAllowed] = useState(false);
     const [timer,setTimer] = useState(time);
@@ -31,13 +31,17 @@ function ResendOtp({time}) {
 
     function handleResendOTP() {
         resetTimer();
+        requestOtphandler();
     }
 
   return (
     <div>
-      <div className={styles.getOTPBtn}>
+      <div className={styles.getOTPBtnContainer}>
         {canShowTimer && <p>Resend OTP in {timer} seconds</p>}
+        <div className={styles.btnWrapper}>
+        <button value="validateOTP" disabled={!canValidate} onClick={validateOTPHandler}>Validate</button>
         <button value="getOTP" disabled={!isValidateAllowed} onClick={handleResendOTP}>Get OTP</button>
+        </div>
        </div>
     </div>
   )

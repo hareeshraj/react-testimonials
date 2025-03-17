@@ -2,15 +2,14 @@ import ResendOtp from "../components/resendTimer/ResendOtp";
 import styles from "./SignIn.module.css";
 import { useState,useRef, useEffect } from "react";
 
-function OTPContainer({length=4,handleGetOTP}){
+function OTPContainer({length=4,handleGetOTP,requestOtphandler,validateOTPHandler}){
     const [otp,setOtp] = useState(new Array(length).fill(""));
+    const [canValidate,setCanValidate] = useState(false);
     const inputRefs = useRef([]);
     useEffect(()=>{
         inputRefs.current[0].focus();
     },[])
-    function handleSignIn(combinedOtp) {
-        console.log("calling otp validation..."+combinedOtp);
-    }
+
     function handleChange(index,e){
         const value = e.target.value;
         if(isNaN(value)) return;
@@ -19,11 +18,13 @@ function OTPContainer({length=4,handleGetOTP}){
         setOtp(tempOtp);
         const combinedOtp = tempOtp.join("");
         if(combinedOtp.length === length) {
-            handleSignIn(combinedOtp);
+            setCanValidate(true);
+            return;
         }
         if(value  && index < length-1 && inputRefs.current[index+1]) {
             inputRefs.current[index+1].focus();
         }
+        setCanValidate(false);
     }
     function handleClick(index) {
         inputRefs.current[index].setSelectionRange(1,1);
@@ -59,7 +60,7 @@ function OTPContainer({length=4,handleGetOTP}){
                 })}
                 </div>
                 <div className={`${styles.otpErrContainer} ${styles.hidden}`}>Invalid OTP</div>
-                <ResendOtp time={30} isValidateAllowed />
+                <ResendOtp time={30} canValidate={canValidate} requestOtphandler={requestOtphandler} validateOTPHandler={()=>validateOTPHandler(otp.join(""))}/>
             </fieldset>
           </div>
     )
