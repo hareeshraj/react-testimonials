@@ -1,0 +1,10 @@
+.getOTPBtn {
+    text-align: center;
+    margin: 10px;
+}
+.getOTPBtn button{
+    padding: 10px;
+}
+.hidden {
+    display: none;
+}
