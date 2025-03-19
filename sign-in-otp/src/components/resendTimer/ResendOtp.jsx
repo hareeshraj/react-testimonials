@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 import { useEffect, useState } from "react"
-function ResendOtp({time,canValidate,requestOtphandler,validateOTPHandler}) {
+import { RotatingLines } from 'react-loader-spinner';
+function ResendOtp({time,canValidate,requestOtphandler,validateOTPHandler,isLoading,isValidating}) {
   
     const [isValidateAllowed, setIsValidateAllowed] = useState(false);
     const [timer,setTimer] = useState(time);
@@ -39,8 +40,30 @@ function ResendOtp({time,canValidate,requestOtphandler,validateOTPHandler}) {
       <div className={styles.getOTPBtnContainer}>
         {canShowTimer && <p>Resend OTP in {timer} seconds</p>}
         <div className={styles.btnWrapper}>
-        <button value="validateOTP" disabled={!canValidate} onClick={validateOTPHandler}>Validate</button>
-        <button value="getOTP" disabled={!isValidateAllowed} onClick={handleResendOTP}>Get OTP</button>
+        {!isValidating?<button value="validateOTP" disabled={!canValidate} onClick={validateOTPHandler}>Validate</button>:
+        <RotatingLines
+          visible={true}
+          height="25"
+          width="25"
+          color="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          ariaLabel="rotating-lines-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />}
+        {!isLoading?<button value="getOTP" disabled={!isValidateAllowed} onClick={handleResendOTP}>Get OTP</button>:
+        <RotatingLines
+          visible={true}
+          height="25"
+          width="25"
+          color="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          ariaLabel="rotating-lines-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />}
         </div>
        </div>
     </div>

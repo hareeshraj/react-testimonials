@@ -2,7 +2,7 @@ import ResendOtp from "../components/resendTimer/ResendOtp";
 import styles from "./SignIn.module.css";
 import { useState,useRef, useEffect } from "react";
 
-function OTPContainer({length=4,handleGetOTP,requestOtphandler,validateOTPHandler}){
+function OTPContainer({length=4,handleGetOTP,requestOtphandler,validateOTPHandler,isLoading,isValidating}){
     const [otp,setOtp] = useState(new Array(length).fill(""));
     const [canValidate,setCanValidate] = useState(false);
     const inputRefs = useRef([]);
@@ -60,7 +60,7 @@ function OTPContainer({length=4,handleGetOTP,requestOtphandler,validateOTPHandle
                 })}
                 </div>
                 <div className={`${styles.otpErrContainer} ${styles.hidden}`}>Invalid OTP</div>
-                <ResendOtp time={30} canValidate={canValidate} requestOtphandler={requestOtphandler} validateOTPHandler={()=>validateOTPHandler(otp.join(""))}/>
+                <ResendOtp time={30} canValidate={canValidate} requestOtphandler={requestOtphandler} validateOTPHandler={()=>validateOTPHandler(otp.join(""))} isLoading={isLoading} isValidating ={isValidating}/>
             </fieldset>
           </div>
     )
