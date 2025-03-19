@@ -1,0 +1,52 @@
+.signInWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputField{
+    width: 33%;
+    font-size: 16px;
+}
+.inputField input,.countryCode{
+    padding: 10px;
+}
+.phoneWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.getOTPBtn {
+    text-align: center;
+    margin: 10px;
+}
+.getOTPBtn button{
+    padding: 10px;
+}
+input, button{
+    cursor: pointer;
+}
+.otpFieldContainer{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.enterOTPcontainer fieldset{
+    width: 200px;
+}
+.otpField{
+   display: flex;
+   justify-content: center;
+   width: fit-content;
+}
+.otpField input{
+    padding: 10px;
+    width: 25%;
+    font-size: 16px;
+}
+.hidden{
+    display: none;
+}
+.otpErrContainer{
+    color: red;
+}

@@ -1,0 +1,22 @@
+.btnWrapper {
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.getOTPBtnContainer {
+    text-align: center;
+    display: flex;
+    margin:10px 5px;
+    justify-content: center;
+    flex-direction: column;
+}
+.getOTPBtnContainer p{
+    margin: 5px 0;
+}
+.getOTPBtnContainer button{
+    padding: 10px;
+}
+.hidden {
+    display: none;
+}
